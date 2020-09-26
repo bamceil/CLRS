@@ -19,6 +19,8 @@ int right_child(int parent) { return 2 * parent + 2; }
 int parent(int child) { return (child - 1) / 2; }
 void swim(vector<int> &, int);
 void sink(vector<int> &, int, int);
+void quick_sort(vector<int> &vec, int begin, int end);
+int partition(vector<int> &vec, int begin, int end);
 
 void CLRS::merge_sort(vector<int> &vec)
 {
@@ -128,4 +130,35 @@ void sink(vector<int> &vec, int k, int size)
         else
             break;
     }
+}
+
+void CLRS::quick_sort(vector<int> &vec)
+{
+    ::quick_sort(vec, 0, vec.size() - 1);
+}
+
+void quick_sort(vector<int> &vec, int begin, int end)
+{
+    if (begin >= end)
+        return;
+    int idx = partition(vec, begin, end);
+    quick_sort(vec, begin, idx - 1);
+    quick_sort(vec, idx + 1, end);
+}
+
+int partition(vector<int> &vec, int begin, int end)
+{
+    int i = begin + 1, j = end;
+    while (i <= j)
+    {
+        while (i <= j && vec[i] <= vec[begin])
+            ++i;
+        while (i <= j && vec[j] >= vec[begin])
+            --j;
+        if (i > j)
+            break;
+        swap(vec[i], vec[j]);
+    }
+    swap(vec[j], vec[begin]);
+    return j;
 }

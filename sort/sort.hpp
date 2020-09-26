@@ -8,4 +8,5 @@ namespace CLRS
     void insert_sort(std::vector<int> &);
     void select_sort(std::vector<int> &);
     void heap_sort(std::vector<int> &);
+    void quick_sort(std::vector<int> &);
 } // namespace CLRS

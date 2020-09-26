@@ -62,6 +62,20 @@ TEST(HeapSortTest, BasicInput)
     EXPECT_EQ(vec1, basicInput);
 }
 
+TEST(QuickSortTest, EmptyInput)
+{
+    vector<int> vec;
+    ASSERT_NO_THROW(quick_sort(vec));
+    EXPECT_EQ(0, vec.size());
+}
+
+TEST(QuickSortTest, BasicInput)
+{
+    vector<int> vec1{0, 7, 5, 9, 6, 8, 4, 1, 2, 3};
+    ASSERT_NO_THROW(quick_sort(vec1));
+    EXPECT_EQ(vec1, basicInput);
+}
+
 int main(int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
