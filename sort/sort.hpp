@@ -9,4 +9,6 @@ namespace CLRS
     void select_sort(std::vector<int> &);
     void heap_sort(std::vector<int> &);
     void quick_sort(std::vector<int> &);
+    void quick_sort_median3(std::vector<int> &);
+    void quick_sort_3way(std::vector<int> &);
 } // namespace CLRS

@@ -1,5 +1,7 @@
 #include "sort.hpp"
 
+#include <random>
+
 using namespace std;
 
 // Sort array from begin to end by merge sort algs.
@@ -8,19 +10,30 @@ void merge_sort(vector<int> &vec, int begin, int end, int *arr);
 void merge(vector<int> &vec, int begin, int mid, int end, int *arr);
 // Build a heap.
 void make_heap(vector<int> &vec);
-// For Heap & Heap sort.
+// For Heap & Heap Sort.
 // Return left child index. The root is at index 0.
 int left_child(int parent) { return 2 * parent + 1; }
-// For Heap & Heap sort.
+// For Heap & Heap Sort.
 // Return right child index. The root is at index 0.
 int right_child(int parent) { return 2 * parent + 2; }
-// For Heap & Heap sort.
+// For Heap & Heap Sort.
 // Return parent index. The root is at index 0.
 int parent(int child) { return (child - 1) / 2; }
 void swim(vector<int> &, int);
 void sink(vector<int> &, int, int);
 void quick_sort(vector<int> &vec, int begin, int end);
+// For Quick Sort
 int partition(vector<int> &vec, int begin, int end);
+// For Quick Sort (Median-3 version)
+// Return the pivot index
+int pivot(vector<int> &vec, int begin, int end);
+// For Quick Sort (Median-3 version)
+// Return median number index from (i, j, k)
+int median3(vector<int> &vec, int i, int j, int k);
+void quick_sort_median3(vector<int> &vec, int begin, int end);
+int partition_median3(vector<int> &vec, int begin, int end);
+// For Quick Sort (Three way version)
+void way3sort(vector<int> &vec, int begin, int end);
 
 void CLRS::merge_sort(vector<int> &vec)
 {
@@ -115,6 +128,7 @@ void swim(vector<int> &vec, int k)
         p = parent(k);
     }
 }
+
 void sink(vector<int> &vec, int k, int size)
 {
     while (left_child(k) < size)
@@ -161,4 +175,83 @@ int partition(vector<int> &vec, int begin, int end)
     }
     swap(vec[j], vec[begin]);
     return j;
+}
+
+void CLRS::quick_sort_median3(std::vector<int> &vec)
+{
+    ::quick_sort_median3(vec, 0, vec.size() - 1);
+}
+
+int median3(vector<int> &vec, int i, int j, int k)
+{
+    int idx = vec[i] < vec[j] ? i : j;
+    if (vec[idx] > vec[k])
+        return idx;
+    if (idx == i)
+        return vec[j] < vec[k] ? j : k;
+    else
+        return vec[i] < vec[k] ? i : k;
+}
+
+int pivot(vector<int> &vec, int begin, int end)
+{
+    random_device rd;
+    default_random_engine gen(rd());
+    uniform_int_distribution<> dis(begin, end);
+    int i = dis(gen);
+    int j = dis(gen);
+    int k = dis(gen);
+    return median3(vec, i, j, k);
+}
+
+void quick_sort_median3(vector<int> &vec, int begin, int end)
+{
+    if (begin >= end)
+        return;
+    int idx = partition_median3(vec, begin, end);
+    quick_sort_median3(vec, begin, idx - 1);
+    quick_sort_median3(vec, idx + 1, end);
+}
+
+int partition_median3(vector<int> &vec, int begin, int end)
+{
+    swap(vec[pivot(vec, begin, end)], vec[begin]);
+    int i = begin + 1, j = end;
+    while (i <= j)
+    {
+        while (i <= j && vec[i] <= vec[begin])
+            ++i;
+        while (i <= j && vec[j] >= vec[begin])
+            --j;
+        if (i > j)
+            break;
+        swap(vec[i], vec[j]);
+    }
+    swap(vec[j], vec[begin]);
+    return j;
+}
+
+void CLRS::quick_sort_3way(vector<int> &vec)
+{
+    way3sort(vec, 0, vec.size() - 1);
+}
+
+void way3sort(vector<int> &vec, int begin, int end)
+{
+    if (begin >= end)
+        return;
+    int lt = begin, gt = end;
+    int val = vec[lt];
+    int i = lt + 1;
+    while (i <= gt)
+    {
+        if (vec[i] < val)
+            swap(vec[i++], vec[lt++]);
+        else if (vec[i] > val)
+            swap(vec[i], vec[gt--]);
+        else
+            ++i;
+    }
+    way3sort(vec, begin, lt - 1);
+    way3sort(vec, gt + 1, end);
 }
