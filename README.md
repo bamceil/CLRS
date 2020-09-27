@@ -16,11 +16,11 @@
 
 构建排序相关程序：
 ```
-xmake build sort
+xmake build test_sort
 ```
 
 ### 运行
 
 ```
-xmake run sort
+xmake run test_sort
 ```

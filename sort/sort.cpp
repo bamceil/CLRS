@@ -71,6 +71,22 @@ void merge(vector<int> &vec, int begin, int mid, int end, int *arr)
         vec[begin + i] = arr[i];
 }
 
+void CLRS::merge_sort_b2u(vector<int> &vec)
+{
+    int *tmp = new int[vec.size()];
+    for (int len = 1; len < vec.size(); len *= 2)
+    {
+        for (int lo = 0; lo < vec.size() - len; lo += len + len)
+        {
+            int mid = lo + len - 1;
+            int hi = min(lo + len + len - 1, static_cast<int>(vec.size()) - 1);
+            merge(vec, lo, mid, hi, tmp);
+        }
+    }
+
+    delete[] tmp;
+}
+
 void CLRS::insert_sort(vector<int> &vec)
 {
     for (size_t i = 1; i < vec.size(); ++i)
@@ -254,4 +270,21 @@ void way3sort(vector<int> &vec, int begin, int end)
     }
     way3sort(vec, begin, lt - 1);
     way3sort(vec, gt + 1, end);
+}
+
+void CLRS::shell_sort(std::vector<int> &vec)
+{
+    int len = vec.size();
+    int ph = 1;
+    while (ph < len / 3)
+        ph = ph * 3 + 1;
+    while (ph >= 1)
+    {
+        for (int i = ph; i < len; ++i)
+        {
+            for (int j = i; j >= ph && vec[j] < vec[j - ph]; j -= ph)
+                swap(vec[j], vec[j - ph]);
+        }
+        ph /= 3;
+    }
 }

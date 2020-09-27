@@ -34,6 +34,28 @@ TEST(MergeSortTest, ReverseInput)
     EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
 }
 
+TEST(MergeSortBUTest, EmptyInput)
+{
+    vector<int> vec;
+    ASSERT_NO_THROW(merge_sort_b2u(vec));
+    EXPECT_EQ(0, vec.size());
+}
+
+TEST(MergeSortBUTest, BasicInput)
+{
+    vector<int> vec1{0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    ASSERT_NO_THROW(merge_sort_b2u(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(MergeSortBUTest, ReverseInput)
+{
+    vector<int> vec1 = rangeInput;
+    reverse(vec1.begin(), vec1.end());
+    ASSERT_NO_THROW(merge_sort_b2u(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
 TEST(InsertSortTest, EmptyInput)
 {
     vector<int> vec;
@@ -75,6 +97,28 @@ TEST(SelectSortTest, ReverseInput)
     vector<int> vec1 = rangeInput;
     reverse(vec1.begin(), vec1.end());
     ASSERT_NO_THROW(select_sort(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(ShellSortTest, EmptyInput)
+{
+    vector<int> vec;
+    ASSERT_NO_THROW(shell_sort(vec));
+    EXPECT_EQ(0, vec.size());
+}
+
+TEST(ShellSortTest, BasicInput)
+{
+    vector<int> vec1{0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    ASSERT_NO_THROW(shell_sort(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(ShellSortTest, ReverseInput)
+{
+    vector<int> vec1 = rangeInput;
+    reverse(vec1.begin(), vec1.end());
+    ASSERT_NO_THROW(shell_sort(vec1));
     EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
 }
 

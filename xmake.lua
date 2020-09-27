@@ -1,20 +1,27 @@
 add_rules("mode.debug", "mode.release")
 
-add_requires("vcpkg::gtest")
+add_requires("vcpkg::gtest", "vcpkg::benchmark")
 
-target("sort")
+target("test_sort")
     set_kind("binary")
     add_includedirs("sort")
     add_files("sort/sort.cpp")
     add_files("test/test_sort.cpp")
     add_packages("vcpkg::gtest")
 
-target("search")
+target("test_search")
     set_kind("binary")
     add_includedirs("search")
     add_files("search/search.cpp")
     add_files("test/test_search.cpp")
     add_packages("vcpkg::gtest")
+
+target("benchmark_sort")
+    set_kind("binary")
+    add_includedirs("sort")
+    add_files("sort/sort.cpp")
+    add_files("benchmark/sort.cpp")
+    add_packages("vcpkg::benchmark")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
