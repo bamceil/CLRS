@@ -9,8 +9,8 @@
 #ifdef _WIN32
 #pragma comment(lib, "Shlwapi.lib")
 #ifdef _DEBUG
-#pragma comment(lib, "benchmarkd.lib")
-#pragma comment(lib, "benchmark_maind.lib")
+#pragma comment(lib, "benchmark.lib")
+#pragma comment(lib, "benchmark_main.lib")
 #else
 #pragma comment(lib, "benchmark.lib")
 #pragma comment(lib, "benchmark_main.lib")

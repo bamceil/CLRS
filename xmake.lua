@@ -1,22 +1,47 @@
 add_rules("mode.debug", "mode.release")
 
+-- test
+
 target("test_sort")
     set_kind("binary")
     add_includedirs("sort")
-    add_files("sort/sort.cpp")
-    add_files("test/test_sort.cpp")
+    add_files("sort/sort.cpp", "test/test_sort.cpp")
     on_load(function(target)
         target:add(find_packages("vcpkg::gtest"))
     end)
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
 
 target("test_search")
     set_kind("binary")
     add_includedirs("search")
-    add_files("search/search.cpp")
-    add_files("test/test_search.cpp")
+    add_files("search/search.cpp", "test/test_search.cpp")
     on_load(function(target)
         target:add(find_packages("vcpkg::gtest"))
     end)
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
+
+target("test_algs")
+    set_kind("binary")
+    add_includedirs("algs")
+    add_files("algs/algs.cpp", "test/test_algs.cpp")
+    on_load(function(target)
+        target:add(find_packages("vcpkg::gtest"))
+    end)
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
+
+-- benchmark
 
 target("benchmark_sorted")
     set_kind("binary")
@@ -26,7 +51,11 @@ target("benchmark_sorted")
     on_load(function(target)
         target:add(find_packages("vcpkg::benchmark"))
     end)
-    add_cxxflags("/MD")
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
 
 target("benchmark_reverse")
     set_kind("binary")
@@ -37,7 +66,11 @@ target("benchmark_reverse")
         target:add(find_packages("vcpkg::benchmark"))
     end)
     add_ldflags("/STACK:8388608")
-    add_cxxflags("/MD")
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
 
 target("benchmark_random")
     set_kind("binary")
@@ -47,7 +80,11 @@ target("benchmark_random")
     on_load(function(target)
         target:add(find_packages("vcpkg::benchmark"))
     end)
-    add_cxxflags("/MD")
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
 
 target("benchmark_repeted")
     set_kind("binary")
@@ -57,7 +94,11 @@ target("benchmark_repeted")
     on_load(function(target)
         target:add(find_packages("vcpkg::benchmark"))
     end)
-    add_cxxflags("/MD")
+    if is_mode("debug") then 
+        add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

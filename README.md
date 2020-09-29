@@ -9,7 +9,7 @@
 
 计划上的算法：
 
-- [ ] sort
+- [x] sort
 - [ ] search
 
 ### 构建
@@ -24,3 +24,7 @@ xmake build test_sort
 ```
 xmake run test_sort
 ```
+
+### License
+
+Apache 2.0
