@@ -1,6 +1,7 @@
 #include "sort.hpp"
 
 #include <random>
+#include <iostream>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ void quick_sort_median3(vector<int> &vec, int begin, int end);
 int partition_median3(vector<int> &vec, int begin, int end);
 // For Quick Sort (Three way version)
 void way3sort(vector<int> &vec, int begin, int end);
+void radix_count_sort(vector<int> &vec, int exp);
 
 void CLRS::merge_sort(vector<int> &vec)
 {
@@ -287,4 +289,49 @@ void CLRS::shell_sort(std::vector<int> &vec)
         }
         ph /= 3;
     }
+}
+
+void CLRS::counting_sort(vector<int> &vec, int maxValue)
+{
+    vector<int> cvec(maxValue + 1, 0);
+    for (int i = 0; i < vec.size(); ++i)
+        ++cvec[vec[i]];
+    for (int i = 1; i <= maxValue; ++i)
+        cvec[i] += cvec[i - 1];
+    vector<int> sortedArray(vec.size(), 0);
+    for (int i = vec.size() - 1; i >= 0; --i)
+    {
+        sortedArray[cvec[vec[i]] - 1] = vec[i];
+        --cvec[vec[i]];
+    }
+    vec = sortedArray;
+}
+
+void CLRS::radix_sort(std::vector<int> &vec)
+{
+    if (vec.empty())
+        return;
+    int max = *max_element(vec.begin(), vec.end());
+
+    for (int exp = 1; max / exp > 0; exp *= 10)
+        ::radix_count_sort(vec, exp);
+}
+
+void radix_count_sort(vector<int> &vec, int exp)
+{
+    vector<int> range(10, 0);
+    vector<int> tmpVec(vec.size(), 0);
+
+    for (int i = 0; i < vec.size(); ++i)
+        range[(vec[i] / exp) % 10]++;
+
+    for (int i = 1; i < range.size(); ++i)
+        range[i] += range[i - 1];
+
+    for (int i = vec.size() - 1; i >= 0; --i)
+    {
+        tmpVec[range[(vec[i] / exp) % 10] - 1] = vec[i];
+        range[(vec[i] / exp) % 10]--;
+    }
+    vec = tmpVec;
 }

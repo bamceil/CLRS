@@ -7,7 +7,7 @@ using namespace CLRS;
 
 int f()
 {
-    static int i = 1;
+    static int i = 0;
     return i++;
 }
 vector<int> rangeInput(1000);
@@ -207,6 +207,52 @@ TEST(ThreeWayQuickSortTest, ReverseInput)
     vector<int> vec1 = rangeInput;
     reverse(vec1.begin(), vec1.end());
     ASSERT_NO_THROW(quick_sort_3way(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(CountingSortTest, EmptyInput)
+{
+    vector<int> vec;
+    ASSERT_NO_THROW(counting_sort(vec, 0));
+    EXPECT_EQ(0, vec.size());
+    ASSERT_NO_THROW(counting_sort(vec, 10));
+    EXPECT_EQ(0, vec.size());
+}
+
+TEST(CountingSortTest, BasicInput)
+{
+    vector<int> vec1{0, 7, 5, 9, 6, 8, 4, 1, 2, 3};
+    ASSERT_NO_THROW(counting_sort(vec1, 9));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(CountingSortTest, ReverseInput)
+{
+    vector<int> vec1 = rangeInput;
+    reverse(vec1.begin(), vec1.end());
+    ASSERT_NO_THROW(counting_sort(vec1, rangeInput.size() - 1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(RadixSortTest, EmptyInput)
+{
+    vector<int> vec;
+    ASSERT_NO_THROW(radix_sort(vec));
+    EXPECT_EQ(0, vec.size());
+}
+
+TEST(RadixSortTest, BasicInput)
+{
+    vector<int> vec1{10, 71, 25, 9, 6, 8, 14, 1, 2, 3};
+    ASSERT_NO_THROW(radix_sort(vec1));
+    EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
+}
+
+TEST(RadixSortTest, ReverseInput)
+{
+    vector<int> vec1 = rangeInput;
+    reverse(vec1.begin(), vec1.end());
+    ASSERT_NO_THROW(radix_sort(vec1));
     EXPECT_TRUE(is_sorted(vec1.begin(), vec1.end()));
 }
 

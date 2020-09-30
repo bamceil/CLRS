@@ -13,4 +13,6 @@ namespace CLRS
     void quick_sort(std::vector<int> &);
     void quick_sort_median3(std::vector<int> &);
     void quick_sort_3way(std::vector<int> &);
+    void counting_sort(std::vector<int> &vec, int maxValue);
+    void radix_sort(std::vector<int> &);
 } // namespace CLRS
