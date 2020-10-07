@@ -30,6 +30,7 @@ target("test_search")
 
 target("test_algs")
     set_kind("binary")
+    set_languages("c++17")
     add_includedirs("algs")
     add_files("algs/algs.cpp", "test/test_algs.cpp")
     on_load(function(target)
@@ -37,6 +38,20 @@ target("test_algs")
     end)
     if is_mode("debug") then 
         add_cxxflags("/MDd")
+    else 
+        add_cxxflags("/MD")
+    end
+
+target("test_libs")
+    set_kind("binary")
+    set_languages("c++17")
+    add_includedirs("libs")
+    add_files("libs/list.cpp", "test/test_libs.cpp")
+    on_load(function(target)
+        target:add(find_packages("vcpkg::gtest"))
+    end)
+    if is_mode("debug") then 
+        add_cxxflags("/MDd /EHsc")
     else 
         add_cxxflags("/MD")
     end
