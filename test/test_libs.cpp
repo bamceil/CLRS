@@ -5,7 +5,7 @@ using namespace std;
 
 TEST(SharedPtrList, NormalTest) {
     CLRS::list ls;
-    for (int i = 0; i < 10; ++i) ls.insert(i);
+    for (int i = 0; i < 10; ++i) ls.push_back(i);
     EXPECT_EQ(ls.size(), 10);
     shared_ptr<CLRS::inner_node> ptr = ls.find(5);
     ASSERT_TRUE(ptr);
@@ -16,7 +16,7 @@ TEST(SharedPtrList, NormalTest) {
 
 TEST(SharedPtrList, NotFoundTest) {
     CLRS::list ls;
-    for (int i = 0; i < 10; ++i) ls.insert(i);
+    for (int i = 0; i < 10; ++i) ls.push_back(i);
     EXPECT_EQ(ls.size(), 10);
     shared_ptr<CLRS::inner_node> ptr = ls.find(-6);
     EXPECT_FALSE(ptr);
@@ -26,7 +26,7 @@ TEST(SharedPtrList, NotFoundTest) {
 
 TEST(SharedPtrList, BorderTest) {
     CLRS::list ls;
-    for (int i = 0; i < 10; ++i) ls.insert(i);
+    for (int i = 0; i < 10; ++i) ls.push_back(i);
     EXPECT_EQ(ls.size(), 10);
     shared_ptr<CLRS::inner_node> ptr = ls.find(0);
     ASSERT_TRUE(ptr);
