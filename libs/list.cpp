@@ -6,18 +6,57 @@
 using namespace std;
 
 namespace CLRS {
-void list::insert(int value) {
+void list::push_back(int value) {
     shared_ptr<inner_node> inode(new inner_node);
     inode->value_ = value;
     inode->prev_ = tail_;
     if (count_ == 0) {
         head_ = tail_ = inode;
-    }
-    else {
+    } else {
         tail_->next_ = inode;
         tail_ = inode;
     }
     ++count_;
+}
+
+void list::push_front(int value) {
+    shared_ptr<inner_node> inode(new inner_node);
+    inode->value_ = value;
+    inode->next_ = head_;
+    if (count_ == 0) {
+        head_ = tail_ = inode;
+    } else {
+        head_->prev_ = inode;
+        head_ = inode;
+    }
+    ++count_;
+}
+
+void list::pop_back() {
+    if (empty()) return;
+    auto prev = tail_->prev_.lock();
+    if (prev) {
+        prev->next_.reset();
+        tail_.reset();
+        tail_ = prev;
+    } else {
+        head_.reset();
+        tail_.reset();
+    }
+    --count_;
+}
+void list::pop_front() {
+    if (empty()) return;
+    auto next = head_->next_;
+    if (next) {
+        head_->next_.reset();
+        head_.reset();
+        head_ = next;
+    } else {
+        head_.reset();
+        tail_.reset();
+    }
+    --count_;
 }
 
 void list::remove(shared_ptr<inner_node> iter) {
@@ -29,8 +68,7 @@ void list::remove(shared_ptr<inner_node> iter) {
             iter->next_->prev_ = prev;
         else
             tail_ = prev;
-    }
-    else {
+    } else {
         head_ = iter->next_;
         if (head_)
             head_->prev_.reset();
@@ -40,7 +78,7 @@ void list::remove(shared_ptr<inner_node> iter) {
     --count_;
 }
 
-shared_ptr<inner_node> list::find(int target) {
+const shared_ptr<inner_node> list::find(int target) const {
     auto head = head_;
     while (head) {
         if (head->value_ == target) return head;
@@ -62,10 +100,13 @@ void list::print() const {
 // int main(int argc, char const* argv[]) {
 //     using namespace CLRS;
 //     list ls;
-//     for (int i = 0; i < 20; ++i) ls.insert(i);
+//     for (int i = 0; i < 2; ++i) ls.push_front(i);
 //     cout << ls.size() << endl;
+//     ls.pop_front();
 //     ls.print();
-//     cout << ls.size() << endl;
+//     cout << "-------" << endl;
+//     ls.pop_back();
+//     ls.print();
 
 //     return 0;
 // }

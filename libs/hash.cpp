@@ -12,7 +12,7 @@ void hash_table_chainning::insert(int value) {
 
 void hash_table_chainning::remove(int value) {
     size_t h = hash_(value) % countBubbles_;
-    auto iter = table_[h].find(value);
+    const auto iter = table_[h].find(value);
     if (!iter) return;
     table_[h].remove(iter);
     --count_;
@@ -30,16 +30,16 @@ void hash_table_chainning::print() const {
 
 }  // namespace CLRS
 
-int main(int argc, char const* argv[]) {
-    using namespace CLRS;
+// int main(int argc, char const* argv[]) {
+//     using namespace CLRS;
 
-    hash_table_chainning ht(50);
+//     hash_table_chainning ht(50);
 
-    for (int i = 0; i < 1000; ++i) ht.insert(i);
+//     for (int i = 0; i < 1000; ++i) ht.insert(i);
 
-    ht.print();
+//     ht.print();
 
-    std::cout << ht.contains(1000) << " " << ht.contains(100) << std::endl;
+//     std::cout << ht.contains(1000) << " " << ht.contains(100) << std::endl;
 
-    return 0;
-}
+//     return 0;
+// }
