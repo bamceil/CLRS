@@ -172,32 +172,32 @@ const binary_search_tree::pointer binary_search_tree::find_successor(pointer ptr
 
 }  // namespace CLRS
 
-int main(int argc, char const* argv[]) {
-    using namespace CLRS;
-    using namespace std;
+// int main(int argc, char const* argv[]) {
+//     using namespace CLRS;
+//     using namespace std;
 
-    // random_device rd;
-    // default_random_engine gen(rd());
-    // uniform_int_distribution<> dis(1, 200);
-    auto lambda = [](int v) { cout << v << " "; };
+//     // random_device rd;
+//     // default_random_engine gen(rd());
+//     // uniform_int_distribution<> dis(1, 200);
+//     auto lambda = [](int v) { cout << v << " "; };
 
-    binary_search_tree stree;
-    int arr[] = { 211, 450, 22, 7, 34, 98, 578, 324, 657, 56, 454, 687, 434, 34, 2 };
-    for (int i = 0; i < 15; ++i) stree.insert(arr[i]);
-    stree.walk_inorder(lambda);
-    cout << endl;
+//     binary_search_tree stree;
+//     int arr[] = { 211, 450, 22, 7, 34, 98, 578, 324, 657, 56, 454, 687, 434, 34, 2 };
+//     for (int i = 0; i < 15; ++i) stree.insert(arr[i]);
+//     stree.walk_inorder(lambda);
+//     cout << endl;
 
-    stree.remove(stree.max_element());
-    stree.remove(stree.min_element());
-    cout << "Size: " << stree.size() << endl;
-    stree.walk_inorder(lambda);
-    cout << endl;
+//     stree.remove(stree.max_element());
+//     stree.remove(stree.min_element());
+//     cout << "Size: " << stree.size() << endl;
+//     stree.walk_inorder(lambda);
+//     cout << endl;
 
-    stree.remove(stree.find(34));
-    stree.remove(stree.find(578));
-    cout << "Size: " << stree.size() << endl;
-    stree.walk_inorder(lambda);
-    cout << endl;
+//     stree.remove(stree.find(34));
+//     stree.remove(stree.find(578));
+//     cout << "Size: " << stree.size() << endl;
+//     stree.walk_inorder(lambda);
+//     cout << endl;
 
-    return 0;
-}
+//     return 0;
+// }
