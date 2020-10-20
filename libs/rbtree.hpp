@@ -11,7 +11,6 @@ enum class rb_color {
 
 struct rb_node {
     int value_;
-
     rb_node() : value_(0), color_(rb_color::RED), left_(), right_(), parent_() {}
     explicit rb_node(int v) : value_(v), color_(rb_color::RED), left_(), right_(), parent_() {}
 
@@ -41,8 +40,10 @@ public:
     size_t count(pointer ptr) const;
     const pointer root() const { return root_; }
 
-    const pointer min_element() const;
-    const pointer max_element() const;
+    const pointer min_element() const { return min_element(root_); }
+    const pointer min_element(pointer ptr) const;
+    const pointer max_element() const { return max_element(root_); }
+    const pointer max_element(pointer ptr) const;
 
     void walk_preorder(std::function<void(int)> f) const;
 
@@ -54,6 +55,7 @@ private:
     void left_rotate(pointer ptr);
     void right_rotate(pointer ptr);
     void handle_insert_color(pointer ptr);
+    void handle_remove_color(pointer ptr);
 
 private:
     pointer root_;
