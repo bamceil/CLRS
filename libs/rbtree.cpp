@@ -315,38 +315,38 @@ size_t red_black_tree::count(pointer ptr) const {
 
 }  // namespace CLRS
 
-int main(int argc, char const* argv[]) {
-    using namespace CLRS;
-    using namespace std;
-    random_device rd;
-    default_random_engine gen(rd());
-    uniform_int_distribution<> dis(10, 1000);
+// int main(int argc, char const* argv[]) {
+//     using namespace CLRS;
+//     using namespace std;
+//     random_device rd;
+//     default_random_engine gen(rd());
+//     uniform_int_distribution<> dis(10, 1000);
 
-    // vector<pair<size_t, size_t>> pt;
-    // for (int i = 0; i < 1000; i++) {
-    //     red_black_tree rb;
-    //     while (rb.size() != 1000) rb.insert(dis(gen));
-    //     pt.push_back(make_pair(rb.left_count(rb.root()), rb.right_count(rb.root())));
-    // }
+//     // vector<pair<size_t, size_t>> pt;
+//     // for (int i = 0; i < 1000; i++) {
+//     //     red_black_tree rb;
+//     //     while (rb.size() != 1000) rb.insert(dis(gen));
+//     //     pt.push_back(make_pair(rb.left_count(rb.root()), rb.right_count(rb.root())));
+//     // }
 
-    // size_t left_sum = 0;
-    // size_t right_sum = 0;
-    // for (auto i : pt) {
-    //     left_sum += i.first;
-    //     right_sum += i.second;
-    // }
-    // cout << "Left Average: " << left_sum / 1000 << endl;
-    // cout << "Right Average: " << right_sum / 1000 << endl;
+//     // size_t left_sum = 0;
+//     // size_t right_sum = 0;
+//     // for (auto i : pt) {
+//     //     left_sum += i.first;
+//     //     right_sum += i.second;
+//     // }
+//     // cout << "Left Average: " << left_sum / 1000 << endl;
+//     // cout << "Right Average: " << right_sum / 1000 << endl;
 
-    red_black_tree rb;
-    for (int i = 0; i < 1000; ++i) rb.insert(i);
-    cout << "Left Size: " << rb.left_count(rb.root()) << endl;
-    cout << "Right Size: " << rb.right_count(rb.root()) << endl;
+//     red_black_tree rb;
+//     for (int i = 0; i < 1000; ++i) rb.insert(i);
+//     cout << "Left Size: " << rb.left_count(rb.root()) << endl;
+//     cout << "Right Size: " << rb.right_count(rb.root()) << endl;
 
-    while (rb.size() > 500) rb.remove(rb.find(dis(gen)));
+//     while (rb.size() > 500) rb.remove(rb.find(dis(gen)));
 
-    cout << "Left Size: " << rb.left_count(rb.root()) << endl;
-    cout << "Right Size: " << rb.right_count(rb.root()) << endl;
+//     cout << "Left Size: " << rb.left_count(rb.root()) << endl;
+//     cout << "Right Size: " << rb.right_count(rb.root()) << endl;
 
-    return 0;
-}
+//     return 0;
+// }
