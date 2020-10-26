@@ -79,22 +79,22 @@ int skip_list::random_level() const {
 
 }  // namespace CLRS
 
-int main(int argc, char const* argv[]) {
-    using namespace std;
-    using namespace CLRS;
+// int main(int argc, char const* argv[]) {
+//     using namespace std;
+//     using namespace CLRS;
 
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dis(-1000, 1000);
+//     random_device rd;
+//     mt19937 gen(rd());
+//     uniform_int_distribution<> dis(-1000, 1000);
 
-    skip_list list;
-    while (list.size() < 1000) list.insert(dis(gen));
-    cout << "Size: " << list.size() << endl;
+//     skip_list list;
+//     while (list.size() < 1000) list.insert(dis(gen));
+//     cout << "Size: " << list.size() << endl;
 
-    for (int i = 0; i < 100; ++i) {
-        list.remove(i);
-    }
-    cout << "Size: " << list.size() << endl;
+//     for (int i = 0; i < 100; ++i) {
+//         list.remove(i);
+//     }
+//     cout << "Size: " << list.size() << endl;
 
-    return 0;
-}
+//     return 0;
+// }
